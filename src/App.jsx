@@ -4,6 +4,7 @@ import PokemonCard from "./components/PokemonCard";
 import { useState } from "react";
 import pokemonList from "./components/pokemonList";
 import Mario from "./components/Mario";
+import RickRoll from "./components/RickRoll.jsx";
 
 /* Create two new const avatar for bart simpson and homer simpson */
 const bart = {
@@ -56,6 +57,7 @@ function App() {
         <Avatar avatar={bart} />
         <Avatar avatar={homer} />
         <Mario mario={mario} />
+        <RickRoll />
       </div>
     </div>
   );
