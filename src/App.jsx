@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import Avatar from "./components/Avatar.jsx";
+import PokemonCard from "./components/PokemonCard";
+import { useState } from "react";
+import pokemonList from "./components/pokemonList";
+
+/* Create two new const avatar for bart simpson and homer simpson */
+const bart = {
+  image:
+    "https://www.stickees.com/files/cartoon/the-simpsons/2239-bart-simpson-.png",
+  firstName: "Bart",
+  lastName: "Simpson",
+};
+const homer = {
+  image:
+    "https://www.stickees.com/files/cartoon/the-simpsons/2248-homer-simpson-happy.png",
+  firstName: "Homer",
+  lastName: "Simpson",
+};
+
+/* function avatar pour retourner les images, les noms ,les prenoms et le compteur des personnages*/
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [currentPokemonIndex, setCurrentPokemonIndex] = useState(0);
+  const pokemonListLength = pokemonList.length;
+  const handleClickPrev = () => {
+    if (currentPokemonIndex > 0) {
+      setCurrentPokemonIndex(currentPokemonIndex - 1);
+    }
+  };
+  const handleClickNext = () => {
+    if (currentPokemonIndex < pokemonListLength - 1) {
+      setCurrentPokemonIndex(currentPokemonIndex + 1);
+    }
+  };
+  const currentPokemon = pokemonList[currentPokemonIndex];
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <PokemonCard pokemon={currentPokemon} />
+      <button onClick={handleClickPrev} disabled={currentPokemonIndex === 0}>
+        Précédent
+      </button>
+      <button
+        onClick={handleClickNext}
+        disabled={currentPokemonIndex === pokemonListLength - 1}
+      >
+        Suivant
+      </button>
+      <div className="Avatar">
+        <Avatar avatar={bart} />
+        <Avatar avatar={homer} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
